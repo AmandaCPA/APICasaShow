@@ -1,0 +1,17 @@
+@model IEnumerable<ProjetoShow.Models.CasaShow>
+
+    <h5 class="pt-3">Casas Cadastradas</h5>
+
+    <a href="CasaShow/Cadastrar" class="btn btn-outline-primary mt-2 mb-2">Nova Casa</a>
+
+    <hr>
+    @foreach (var casa in Model)
+    {
+        <p>Casa: @casa.Nome</p>
+        <p>Endereço: @casa.Endereco</p>
+        <a href="/CasaShow/Editar/@casa.Id" class="btn btn-success">Editar</a>
+        <a href="/CasaShow/Deletar/@casa.Id" class="btn btn-info">Deletar</a>
+
+        <hr>
+    }
+    

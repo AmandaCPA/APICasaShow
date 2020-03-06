@@ -1,0 +1,23 @@
+@model ProjetoShow.Models.CasaShow
+
+
+
+<h5 class="pt-3">Cadastro de Casas</h5>
+
+<form class="form-horizontal" asp-controller="CasaShow" asp-action="Salvar" method=POST>
+
+<div class="row">
+
+    <input type="hidden" asp-for="Id">
+
+    <div class="col-md-6">
+    <input type=text class="form-control mb-3" asp-for="Nome" placeholder="Nome"> 
+
+    <input type=text class="form-control mb-3" asp-for="Endereco" placeholder="Endereço"> 
+
+    <button class="btn btn-outline-primary">Cadastrar</button>
+    </div>
+
+</div>
+
+</form>

@@ -1,0 +1,54 @@
+@model ProjetoShow.Models.Evento
+
+
+<h5 class="pt-3">Cadastro de Eventos</h5>
+
+<form class="form-horizontal" asp-controller="Evento" asp-action="Salvar" method="POST">
+
+    <div class="row">
+    <input type="hidden" asp-for="Id">
+
+    <div class="col-md-6">
+    <label asp-for="NomeEvento"></label>
+    <input type="text" class="form-control mb-3" asp-for="NomeEvento" required>
+    
+    <label asp-for="Capacidade"></label>
+    <input type="number" class="form-control mb-3" asp-for="Capacidade" required>
+
+    <label asp-for="Data"></label>
+    <input type="datetime-local" class="form-control mb-3" asp-for="Data" required>
+
+    <label asp-for="Valor"></label>
+    <input type="number" class="form-control mb-3" asp-for="Valor" required>
+
+    <label asp-for="CasaShow"></label>
+    <select class="form-control mb-3" asp-for="CasaShow.Id" asp-items='@(new SelectList(ViewBag.CasaShow, "Id", "Nome"))'></select>
+
+    <label asp-for="Ingressos"></label>
+    <input type="number" class="form-control mb-3" asp-for="Ingressos" required>
+     
+    <label asp-for="Genero"></label>
+    <select class="form-control mb-3" asp-for="Genero">
+        <option value="Pop">Pop</option>
+        <option value="Rock">Rock</option>
+        <option value="Funk">Funk</option>
+        <option value="Rap">Rap</option>
+        <option value="Raggae">Raggae</option>
+        <option value="Sertanejo">Sertanejo</option>
+    </select>
+      
+    <button class="btn btn-outline-primary">Cadastrar</button>
+    </div>
+
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+

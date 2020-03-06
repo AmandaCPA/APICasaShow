@@ -1,0 +1,58 @@
+@model IEnumerable<ProjetoShow.Models.Evento>
+
+<h5 class="pt-3">Shows Cadastrados</h5>
+
+<a href="/Evento/Cadastrar" class="btn btn-outline-primary mt-2 mb-4">Novo Evento</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CasaShow.Nome)
+            </th>
+            <th>
+                Editar / Deletar
+            </th>
+        </tr>    
+    </thead>   
+    <tbody>    
+    @foreach (var evento in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelEvento => evento.NomeEvento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelEvento => evento.Capacidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelEvento => evento.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelEvento => evento.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelEvento => evento.CasaShow.Nome)
+                </td>
+                <td>
+                    <a href="/Evento/Editar/@evento.Id" class="btn btn-outline-success">Editar</a>
+                    <a href="/Evento/Deletar/@evento.Id" class="btn btn-outline-info">Deletar</a>
+                </td>
+            </tr>
+    }                 
+    </tbody> 
+
+</table>          
+              

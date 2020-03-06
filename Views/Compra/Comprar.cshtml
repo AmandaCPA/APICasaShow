@@ -1,0 +1,17 @@
+@model ProjetoShow.Models.Compra
+
+<h5 class="pt-3">Show @Html.DisplayFor(model => model.Evento.NomeEvento)</h5>
+
+<input type="hidden" asp-controller="Evento" asp-for="Id">
+<p class="mt-3">DATA: @Html.DisplayFor(model => model.Evento.Data)</p>
+<p>INGRESSOS RESTANTES: @Html.DisplayFor(model => model.Evento.Ingressos)</p>
+<p>PREÇO UNITÁRIO: R$ @Html.DisplayFor(model => model.Evento.Valor)</p>
+
+
+<input type="number" class="col-md-3 form-control mb-3" name="compra" placeholder="Quantidade de Ingressos">
+
+<a type="submit" href="#" class="btn btn-outline-primary">Confirmar Compra</a>
+
+
+
+</div>

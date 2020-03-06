@@ -1,0 +1,47 @@
+@model IEnumerable<ProjetoShow.Models.Evento>
+
+
+<h5 class="pt-3">Agenda Completa</h5>
+
+<hr>
+@foreach (var evento in Model)
+{
+    <div class="row">
+          
+    <div>
+    @if(evento.Genero == "Pop")
+    {<h3 class="ml-3 mr-4"><img width=240 src="~/imagens/PopNeon.jpg"></h3>}  
+    @if(evento.Genero == "Rock")
+    {<h3 class="ml-3 mr-4"><img width=240 src="~/imagens/RockNeon.jpg"></h3>} 
+    @if(evento.Genero == "Funk")
+    {<h3 class="ml-3 mr-4"><img width=240 src="~/imagens/FunkNeon.jpg"></h3>}  
+    @if(evento.Genero == "Rap")
+    {<h3 class="ml-3 mr-4"><img width=240 src="~/imagens/RapNeon.jpg"></h3>}
+    @if(evento.Genero == "Raggae")
+    {<h3 class="ml-3 mr-4"><img width=240 src="~/imagens/RaggaeNeon.jpg"></h3>}
+    @if(evento.Genero == "Sertanejo")
+    {<h3 class="ml-3 mr-4"><img width=240 src="~/imagens/SertanejoNeon.jpg"></h3>}  
+    </div>            
+         
+    <div>
+    <p style="line-height: 200%"><b>@evento.NomeEvento</b></p>
+    <p style="line-height: 75%"><b>Capacidade:</b> @evento.Capacidade</p>
+    <p style="line-height: 75%"><b>Data:</b> @evento.Data</p>
+    <p style="line-height: 75%"><b>Preço do Ingresso R$:</b> @evento.Valor</p>
+    <p style="line-height: 75%"><b>Local:</b> @evento.CasaShow.Nome</p>
+    <p style="line-height: 75%"><b>Endereço:</b> @evento.CasaShow.Endereco</p>
+    <p style="line-height: 75%"><b>Ingressos:</b> @evento.Ingressos</p>
+    
+
+    <a type="submit" asp-route-id="@evento.Id" asp-controller="Compra" asp-action="Comprar" class="btn btn-info mt-2">Comprar</a>
+    </div>    
+
+    </div>    
+    
+    <hr>
+}
+
+
+
+
+
