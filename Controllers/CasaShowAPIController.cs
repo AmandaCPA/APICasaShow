@@ -18,14 +18,32 @@ namespace ProjetoShow.Controllers
             this.database = database;
         }
 
+        /// <summary>
+        /// Listar todas as casas de show.
+        /// </summary>
         [HttpGet]
         public IActionResult Get()
-        {
+        {                           
             var casasShow = database.CasaShows.ToList();
-            return Ok(casasShow);
+            var cont = casasShow.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(casasShow);
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem casas de show cadastradas");
+                }
+            }
+
         }
 
-        
+
+        /// <summary>
+        /// Buscar por ID.
+        /// </summary>
         [HttpGet("{id}")]
         public IActionResult Get (int id)
         {
@@ -42,13 +60,60 @@ namespace ProjetoShow.Controllers
         }
         
 
+        /// <summary>
+        /// Listar as casas em ordem alfabética crescente por nome.
+        /// </summary>
+        [HttpGet("asc")]
+        public IActionResult GetAsc()
+        {                           
+            var casasShow = database.CasaShows.ToList();
+            var cont = casasShow.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(casasShow.OrderBy(c => c.Nome));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem casas de show cadastradas");
+                }
+            }
+        }
+        
+
+        /// <summary>
+        /// Listar as casas em ordem alfabética decrescente por nome.
+        /// </summary>
+        [HttpGet("desc")]
+        public IActionResult GetDesc()
+        {                           
+            var casasShow = database.CasaShows.ToList();
+            var cont = casasShow.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(casasShow.OrderByDescending(c => c.Nome));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem casas de show cadastradas");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Buscar casa por nome.
+        /// </summary>
         [HttpGet("nome/{nome}")]
         public IActionResult GetNome (string nome)
         {
             try
             {
-                var CasaShow = database.CasaShows.Where(c => c.Nome == nome).ToList();
-                return Ok(CasaShow);
+                var casaShow = database.CasaShows.Where(c => c.Nome == nome).ToList();
+                return Ok(casaShow);
             }
             catch (Exception)
             {
@@ -58,7 +123,9 @@ namespace ProjetoShow.Controllers
         }
 
 
-        
+        /// <summary>
+        /// Inserir casa de show.
+        /// </summary>
         [HttpPost]
         public IActionResult Post([FromBody] CasaShowTemp cTemp)
         {
@@ -93,6 +160,9 @@ namespace ProjetoShow.Controllers
         }
 
 
+        /// <summary>
+        /// Deletar uma casa de show.
+        /// </summary>
         [HttpDelete]
         public IActionResult Delete (int id)
         {
@@ -101,7 +171,7 @@ namespace ProjetoShow.Controllers
                 CasaShow casaShow = database.CasaShows.First(c => c.Id == id);
                 database.CasaShows.Remove(casaShow);
                 database.SaveChanges();
-                return Ok();
+                return new ObjectResult("Casa deletada com sucesso");
             }
             catch (Exception)
             {
@@ -111,6 +181,9 @@ namespace ProjetoShow.Controllers
         }
 
 
+        /// <summary>
+        /// Alterar casa de show.
+        /// </summary>
         [HttpPatch]
         public IActionResult Patch([FromBody] CasaShowTemp casaTemp)
         {
@@ -130,7 +203,7 @@ namespace ProjetoShow.Controllers
                    else
                    {
                         Response.StatusCode = 400;
-                        return new ObjectResult("");
+                        return new ObjectResult("Parametros nulos");
                    } 
                 }   
                 catch

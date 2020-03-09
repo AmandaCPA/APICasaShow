@@ -12,6 +12,10 @@ using ProjetoShow.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Reflection;
+using System.IO;
+using Microsoft.OpenApi.Models;
 
 namespace ProjetoShow
 {
@@ -43,10 +47,30 @@ namespace ProjetoShow
             services.AddAuthorization(options => options.AddPolicy("Administrador", policy => policy.RequireClaim("Administrador", "True")));
 
             services.AddSwaggerGen(config => {
-                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "API DE PRODUTOS", Version = "v1"});
-        });
+                config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo 
+                //{Title = "API DE PRODUTOS", Version = "v1"});
+                {
+                    Version = "v1",
+                    Title = "CasaShow API",
+                    Description = "API aberta para acessar informações do projeto MVC",
+                    Contact = new OpenApiContact
+                        {
+                            Name = "Amanda CasaShow",
+                            Email = string.Empty,
+                            Url = new Uri("https://localhost:5001/"),
+                        },
+                        License = new OpenApiLicense
+                        {
+                            Name = "Envie e-mail para Amanda",
+                            Url = new Uri("mailto:amanda.azevedo@gft.com"),
+                        }
+                });
 
-        }
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                config.IncludeXmlComments(xmlPath);
+        });
+    }
 
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

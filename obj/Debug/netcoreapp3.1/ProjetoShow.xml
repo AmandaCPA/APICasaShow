@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProjetoShow</name>
+    </assembly>
+    <members>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.Get">
+            <summary>
+            Listar todas as casas de show.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.Get(System.Int32)">
+            <summary>
+            Buscar por ID.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.GetAsc">
+            <summary>
+            Listar as casas em ordem alfabética crescente por nome.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.GetDesc">
+            <summary>
+            Listar as casas em ordem alfabética decrescente por nome.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.GetNome(System.String)">
+            <summary>
+            Buscar casa por nome.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.Post(ProjetoShow.Models.CasaShowTemp)">
+            <summary>
+            Inserir casa de show.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.Delete(System.Int32)">
+            <summary>
+            Deletar uma casa de show.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.CasaShowAPIController.Patch(ProjetoShow.Models.CasaShowTemp)">
+            <summary>
+            Alterar casa de show.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.Get">
+            <summary>
+            Listar todos os eventos.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.Get(System.Int32)">
+            <summary>
+            Buscar por ID.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetAsc">
+            <summary>
+            Listar eventos em ordem alfabética crescente por nome.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetDesc">
+            <summary>
+            Listar eventos em ordem alfabética decrescente por nome.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetCapacidadeAsc">
+            <summary>
+            Listar eventos em ordem crescente por capacidade.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.Post(ProjetoShow.Models.EventoTemp)">
+            <summary>
+            Inserir um evento.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.Delete(System.Int32)">
+            <summary>
+            Deletar um evento.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.Patch(ProjetoShow.Models.EventoTemp)">
+            <summary>
+            Alterar evento.
+            </summary>
+        </member>
+    </members>
+</doc>

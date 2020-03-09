@@ -518,3 +518,11 @@ C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
 C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\System.Web.Http.WebHost.dll
+C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\Swashbuckle.Core.dll
+C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\WebActivatorEx.dll
+C:\Users\ACPA\Desktop\ProjetoShow\bin\Debug\netcoreapp3.1\ProjetoShow.xml
+C:\Users\ACPA\Desktop\ProjetoShow\obj\Debug\netcoreapp3.1\ProjetoShow.xml

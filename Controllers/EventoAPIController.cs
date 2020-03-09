@@ -19,15 +19,30 @@ namespace ProjetoShow.Controllers
         }
 
 
+        /// <summary>
+        /// Listar todos os eventos.
+        /// </summary>
         [HttpGet]
         public IActionResult Get()
         //listando eventos
         {
             var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
-            return Ok(eventos);
-        }
+            var cont = eventos.Count();
+            if (cont > 0)
+                {
+                    return Ok(eventos);
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+        }   
 
 
+        /// <summary>
+        /// Buscar por ID.
+        /// </summary>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -39,11 +54,81 @@ namespace ProjetoShow.Controllers
             catch (Exception)
             {
                 Response.StatusCode = 404;
-                return new ObjectResult("");
+                return new ObjectResult("Id inválido");
             }
         }
-        
 
+
+        /// <summary>
+        /// Listar eventos em ordem alfabética crescente por nome.
+        /// </summary>
+        [HttpGet("asc")]
+        public IActionResult GetAsc()
+        {                           
+            var eventos = database.Eventos.ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderBy(c => c.NomeEvento));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Listar eventos em ordem alfabética decrescente por nome.
+        /// </summary>
+        [HttpGet("des")]
+        public IActionResult GetDesc()
+        {                           
+            var eventos = database.Eventos.ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderByDescending(c => c.NomeEvento));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Listar eventos em ordem crescente por capacidade.
+        /// </summary>
+        [HttpGet("asc")]
+        public IActionResult GetCapacidadeAsc()
+        {                           
+            var eventos = database.Eventos.ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderBy(c => c.Capacidade));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
+        
+        
+        /// <summary>
+        /// Inserir um evento.
+        /// </summary>
         [HttpPost]
         public IActionResult Post([FromBody] EventoTemp eTemp) //vai receber um evento da requisição (temporário) (Model Temp)
         {
@@ -64,6 +149,9 @@ namespace ProjetoShow.Controllers
         }
 
 
+        /// <summary>
+        /// Deletar um evento.
+        /// </summary>
         [HttpDelete("{id}")]
         public IActionResult Delete (int id)
         {
@@ -81,6 +169,9 @@ namespace ProjetoShow.Controllers
             }
         }
 
+        /// <summary>
+        /// Alterar evento.
+        /// </summary>
         [HttpPatch]
         public IActionResult Patch([FromBody] EventoTemp eventoTemp) //vai receber um evento da requisição (Model Temp)
         {
