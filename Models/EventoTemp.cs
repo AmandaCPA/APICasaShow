@@ -4,8 +4,7 @@ namespace ProjetoShow.Models
 {
     public class EventoTemp
     {   
-        public int Id {get; set;}
-                    
+        public int Id {get; set;}                    
 
         public string NomeEvento {get; set;}
              

@@ -37,7 +37,6 @@ namespace ProjetoShow.Controllers
                     return new ObjectResult("Não existem casas de show cadastradas");
                 }
             }
-
         }
 
 
@@ -121,8 +120,8 @@ namespace ProjetoShow.Controllers
                 return new ObjectResult("Nome inválido");
             }
         }
-
-
+                  
+       
         /// <summary>
         /// Inserir casa de show.
         /// </summary>
@@ -131,7 +130,7 @@ namespace ProjetoShow.Controllers
         {
             try
             {
-                CasaShow c  = new CasaShow();
+                CasaShow c = new CasaShow();
                 c.Nome = cTemp.Nome;
                     if (c.Nome == null || c.Nome.Length < 1)
                     {
@@ -154,11 +153,11 @@ namespace ProjetoShow.Controllers
             }
             catch
             {
-                Response.StatusCode = 404;
-                return new ObjectResult("Erro");
+                Response.StatusCode = 500;
+                return new ObjectResult("Erro (requisição vazia)");
             }
         }
-
+        
 
         /// <summary>
         /// Deletar uma casa de show.
@@ -187,24 +186,25 @@ namespace ProjetoShow.Controllers
         [HttpPatch]
         public IActionResult Patch([FromBody] CasaShowTemp casaTemp)
         {
-           if(casaTemp.Id > 0)
-           {
-               try
-               {
-                   var casa = database.CasaShows.First(c => c.Id == casaTemp.Id);
+            try {
+            if(casaTemp.Id > 0)
+            {
+                try
+                {
+                    var casa = database.CasaShows.First(c => c.Id == casaTemp.Id);
 
-                   if(casa != null)
-                   {
+                    if(casa != null)
+                    {
                         casa.Nome = casaTemp.Nome != null ? casaTemp.Nome : casa.Nome; 
                         casa.Endereco = casaTemp.Endereco != null ? casaTemp.Endereco : casa.Endereco;   
                         database.SaveChanges();
-                        return Ok();                                                  
-                   }
-                   else
-                   {
+                        return Ok("Casa editada com sucesso");                                                  
+                    }
+                    else
+                    {
                         Response.StatusCode = 400;
                         return new ObjectResult("Parametros nulos");
-                   } 
+                    } 
                 }   
                 catch
                 {
@@ -216,7 +216,14 @@ namespace ProjetoShow.Controllers
             {
                 Response.StatusCode = 400;
                 return new ObjectResult("Id inválido");
-            }               
-        }
+            } 
+        }    
+        catch 
+        {
+            Response.StatusCode = 400;
+            return new ObjectResult("Erro - Parâmetros Inválidos");
+        }   
+
+        }        
     }
 }

@@ -41,7 +41,7 @@ namespace ProjetoShow
             })
 
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(conf => conf.AllowEmptyInputInBodyModelBinding = true);
             services.AddRazorPages();
 
             services.AddAuthorization(options => options.AddPolicy("Administrador", policy => policy.RequireClaim("Administrador", "True")));

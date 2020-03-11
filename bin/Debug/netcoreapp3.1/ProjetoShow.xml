@@ -69,6 +69,31 @@
             Listar eventos em ordem crescente por capacidade.
             </summary>
         </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetCapacidadeDesc">
+            <summary>
+            Listar eventos em ordem decrescente por capacidade.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetPrecoAsc">
+            <summary>
+            Listar eventos em ordem crescente por preço.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetPrecoDesc">
+            <summary>
+            Listar eventos em ordem decrescente por preço.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetDataAsc">
+            <summary>
+            Listar eventos em ordem crescente por data.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.EventoAPIController.GetDataDesc">
+            <summary>
+            Listar eventos em ordem decrescente por data.
+            </summary>
+        </member>
         <member name="M:ProjetoShow.Controllers.EventoAPIController.Post(ProjetoShow.Models.EventoTemp)">
             <summary>
             Inserir um evento.
@@ -82,6 +107,26 @@
         <member name="M:ProjetoShow.Controllers.EventoAPIController.Patch(ProjetoShow.Models.EventoTemp)">
             <summary>
             Alterar evento.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.UsuarioAPIController.Get">
+            <summary>
+            Listar todos os usuários.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.UsuarioAPIController.Get(System.String)">
+            <summary>
+            Buscar por e-mail.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.VendaAPIController.Get">
+            <summary>
+            Listar todas as vendas.
+            </summary>
+        </member>
+        <member name="M:ProjetoShow.Controllers.VendaAPIController.Get(System.Int32)">
+            <summary>
+            Buscar por ID.
             </summary>
         </member>
     </members>

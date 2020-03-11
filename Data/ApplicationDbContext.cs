@@ -12,6 +12,7 @@ namespace ProjetoShow.Data
         public DbSet<Evento> Eventos {get; set;}
         public DbSet<CasaShow> CasaShows {get; set;}
         public DbSet<Compra> Compras {get; set;}
+        public DbSet<Venda> Vendas {get; set;}
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

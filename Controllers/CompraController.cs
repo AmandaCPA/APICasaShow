@@ -22,6 +22,7 @@ namespace ProjetoShow.Controllers
             compra.Evento = Database.Eventos.First(registro => registro.Id == id);
             return View(compra);           
         }    
+        
 
         /*public IActionResult Comprado (Compra compra)
         {

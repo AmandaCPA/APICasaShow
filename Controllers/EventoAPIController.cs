@@ -62,10 +62,10 @@ namespace ProjetoShow.Controllers
         /// <summary>
         /// Listar eventos em ordem alfabética crescente por nome.
         /// </summary>
-        [HttpGet("asc")]
+        [HttpGet("nome/asc")]
         public IActionResult GetAsc()
         {                           
-            var eventos = database.Eventos.ToList();
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
             var cont = eventos.Count();
             {
                 if (cont > 0)
@@ -84,10 +84,10 @@ namespace ProjetoShow.Controllers
         /// <summary>
         /// Listar eventos em ordem alfabética decrescente por nome.
         /// </summary>
-        [HttpGet("des")]
+        [HttpGet("nome/desc")]
         public IActionResult GetDesc()
         {                           
-            var eventos = database.Eventos.ToList();
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
             var cont = eventos.Count();
             {
                 if (cont > 0)
@@ -106,10 +106,10 @@ namespace ProjetoShow.Controllers
         /// <summary>
         /// Listar eventos em ordem crescente por capacidade.
         /// </summary>
-        [HttpGet("asc")]
+        [HttpGet("capacidade/asc")]
         public IActionResult GetCapacidadeAsc()
         {                           
-            var eventos = database.Eventos.ToList();
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
             var cont = eventos.Count();
             {
                 if (cont > 0)
@@ -124,28 +124,187 @@ namespace ProjetoShow.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Listar eventos em ordem decrescente por capacidade.
+        /// </summary>
+        [HttpGet("capacidade/desc")]
+        public IActionResult GetCapacidadeDesc()
+        {                           
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderByDescending(c => c.Capacidade));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
         
-        
+        /// <summary>
+        /// Listar eventos em ordem crescente por preço.
+        /// </summary>
+        [HttpGet("preco/asc")]
+        public IActionResult GetPrecoAsc()
+        {                           
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderBy(c => c.Valor));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Listar eventos em ordem decrescente por preço.
+        /// </summary>
+        [HttpGet("preco/desc")]
+        public IActionResult GetPrecoDesc()
+        {                           
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderByDescending(c => c.Valor));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Listar eventos em ordem crescente por data.
+        /// </summary>
+        [HttpGet("data/asc")]
+        public IActionResult GetDataAsc()
+        {                           
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderBy(c => c.Data));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Listar eventos em ordem decrescente por data.
+        /// </summary>
+        [HttpGet("data/desc")]
+        public IActionResult GetDataDesc()
+        {                           
+            var eventos = database.Eventos.Include(c => c.CasaShow).ToList();
+            var cont = eventos.Count();
+            {
+                if (cont > 0)
+                {
+                    return Ok(eventos.OrderByDescending(c => c.Data));
+                }
+                else
+                {
+                    Response.StatusCode = 404;
+                    return new ObjectResult("Não existem eventos cadastrados");
+                }
+            }
+        }
+
+
         /// <summary>
         /// Inserir um evento.
         /// </summary>
         [HttpPost]
         public IActionResult Post([FromBody] EventoTemp eTemp) //vai receber um evento da requisição (temporário) (Model Temp)
         {
-            Evento e  = new Evento();
-            e.NomeEvento = eTemp.NomeEvento;
-            e.Capacidade = eTemp.Capacidade;
-            e.Data = eTemp.Data;
-            e.Valor = eTemp.Valor;
-            e.CasaShow = database.CasaShows.First(c => c.Id == eTemp.IdCasaShow);
-            e.Genero = eTemp.Genero;
-            e.Ingressos = eTemp.Ingressos;
+            try
+            {
+                Evento e  = new Evento();
+                e.NomeEvento = eTemp.NomeEvento;
+                if (e.NomeEvento == null || e.NomeEvento.Length < 1)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult("Nome Inválido");
+                }
+                e.Capacidade = eTemp.Capacidade;
+                if (e.Capacidade == 0)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult("Valor de capacidade inválido");
+                }
+                e.Data = eTemp.Data;
+                if (e.Data == null)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult("Data inválida");
+                }
+                e.Valor = eTemp.Valor;
+                if (e.Valor == 0)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult("Campo valor inválido");
+                }
+                    try
+                    {
+                    e.CasaShow = database.CasaShows.First(c => c.Id == eTemp.IdCasaShow);
+                        if (e.CasaShow == null || e.CasaShow.Id == 0)
+                        {
+                            Response.StatusCode = 400;
+                            return new ObjectResult("Id da casa de show inválido");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Response.StatusCode = 400;
+                        return new ObjectResult("Id da casa de show inválido");
+                    }
+                e.Genero = eTemp.Genero;
+                if (e.Genero == null || e.Genero.Length < 1)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult("Genero inválido");
+                }
+                e.Ingressos = eTemp.Ingressos;
+                if (e.Ingressos == 0)
+                {
+                    Response.StatusCode = 400;
+                    return new ObjectResult("Valor de ingressos inválido");
+                }
 
-            database.Eventos.Add(e);
-            database.SaveChanges();
+                database.Eventos.Add(e);
+                database.SaveChanges();
 
-            Response.StatusCode = 201;
-            return new ObjectResult("");
+                Response.StatusCode = 200;
+                return new ObjectResult("Evento criado com sucesso");
+            } 
+            catch
+            {
+                Response.StatusCode = 500;
+                return new ObjectResult("Erro (requisição vazia)");
+            }   
         }
 
 
@@ -168,6 +327,7 @@ namespace ProjetoShow.Controllers
                 return new ObjectResult("");
             }
         }
+        
 
         /// <summary>
         /// Alterar evento.
@@ -213,13 +373,13 @@ namespace ProjetoShow.Controllers
                 catch
                 {
                     Response.StatusCode = 400;
-                    return new ObjectResult("erro2");
+                    return new ObjectResult("erro");
                 }
             }
             else
             {
                 Response.StatusCode = 400;
-                return new ObjectResult("erro3");
+                return new ObjectResult("erro");
             }
         }
 
