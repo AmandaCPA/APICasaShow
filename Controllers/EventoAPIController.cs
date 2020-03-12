@@ -273,7 +273,7 @@ namespace ProjetoShow.Controllers
                         if (e.CasaShow == null || e.CasaShow.Id == 0)
                         {
                             Response.StatusCode = 400;
-                            return new ObjectResult("Id da casa de show inválido");
+                            return new ObjectResult("Casa de show inválida");
                         }
                     }
                     catch (Exception)
@@ -319,12 +319,12 @@ namespace ProjetoShow.Controllers
                 Evento evento = database.Eventos.First(p => p.Id == id);
                 database.Eventos.Remove(evento);
                 database.SaveChanges();
-                return Ok();              
+                return Ok("Evento deletado com sucesso");              
             }
             catch (Exception)
             {
                 Response.StatusCode = 404;
-                return new ObjectResult("");
+                return new ObjectResult("Evento não encontrado - Id inválido");
             }
         }
         

@@ -62,7 +62,7 @@ namespace ProjetoShow.Controllers
             catch (Exception)
             {
                 Response.StatusCode = 404;
-                return new ObjectResult("Id inválido");
+                return new ObjectResult("E-mail inválido");
             }
         }
 
